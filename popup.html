@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      width: 420px;
+      min-height: 500px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+    }
+    
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      text-align: center;
+      color: black;
+    }
+    
+    .subtitle {
+      text-align: center;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .types {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    
+    .type-btn {
+      padding: 12px 8px;
+      border: 2px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s;
+      text-align: center;
+    }
+    
+    .type-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+    }
+    
+    .type-btn.active {
+      background: rgba(255,255,255,0.3);
+      border-color: white;
+      transform: scale(1.05);
+    }
+    
+    .card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.9);
+      color: #333;
+      font-size: 13px;
+      resize: vertical;
+      font-family: inherit;
+    }
+    
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 12px;
+    }
+    
+    button:hover:not(:disabled) {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .summary-box {
+      max-height: 300px;
+      overflow-y: auto;
+      line-height: 1.6;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+    
+    .copy-btn {
+      background: rgba(255,255,255,0.2);
+      padding: 8px 16px;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .spinner {
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top: 3px solid white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 12px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h1>⚡ Meeyan Summarizer</h1>
+  <p class="subtitle">Blazing-fast AI summaries powered by Gemini</p>
+  
+  <div class="types">
+    <button class="type-btn active" data-type="brief">
+      ⚡<br>Brief<br><small>Quick Read</small>
+    </button>
+    <button class="type-btn" data-type="detailed">
+      📚<br>Detailed<br><small>In-depth</small>
+    </button>
+    <button class="type-btn" data-type="key-points">
+      🎯<br>Key Points<br><small>Bullets</small>
+    </button>
+  </div>
+  
+  <div class="card">
+    <textarea id="content" placeholder="Article text will appear here from the current page..."></textarea>
+    <button id="summarize">⚡ Summarize This Page</button>
+  </div>
+  
+  <div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+    <div>Generating summary...</div>
+  </div>
+  
+  <div id="result" class="card hidden">
+    <h3 style="margin-bottom: 12px;">Your Summary</h3>
+    <div id="summary" class="summary-box"></div>
+    <button id="copy" class="copy-btn">📋 Copy Summary</button>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

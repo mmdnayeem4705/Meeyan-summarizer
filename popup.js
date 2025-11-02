@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyAdm8assY3x8aTf2iJ6bXCvS6JYUsDvfjo';
+const API_KEY = '****YOUR_API_KEY_HERE****';
 let selectedType = 'brief';
 
 // Type selection
